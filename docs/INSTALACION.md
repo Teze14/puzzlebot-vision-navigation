@@ -59,7 +59,7 @@ Comprobación inicial de importaciones para los nodos del lanzamiento principal:
 python3 -c "import rclpy, cv2, numpy, ultralytics, ament_index_python, launch, launch_ros"
 ```
 
-Esto comprueba disponibilidad, no compatibilidad completa ni funcionamiento del modelo. La documentación oficial de [Ultralytics para Python](https://docs.ultralytics.com/usage/python/) explica la carga de checkpoints y la inferencia; no determina qué versión se utilizó aquí.
+Esto comprueba disponibilidad, no compatibilidad completa ni funcionamiento del modelo. 
 
 ## 3. Configurar el modelo
 
@@ -85,7 +85,7 @@ ros2 interface show my_interfaces/msg/ColorStatus
 ros2 interface show my_interfaces/msg/SignStatus
 ```
 
-Los ejecutables esperados son `line_detector`, `final_detector`, `cnn_detector` y `decision_logic`. La alternativa difusa no está registrada. Consultar los flujos de compilación y selección de paquetes en la [guía oficial de colcon](https://colcon.readthedocs.io/en/main/user/quick-start.html) y el comportamiento de [`--symlink-install`](https://colcon.readthedocs.io/en/main/reference/verb/build.html).
+Los ejecutables esperados son `line_detector`, `final_detector`, `cnn_detector` y `decision_logic`. 
 
 ## 5. Comprobar la percepción antes de habilitar movimiento
 
@@ -116,7 +116,7 @@ ros2 topic echo /color_status
 ros2 topic echo /sign_status
 ```
 
-Cada comando `echo` permanece activo hasta interrumpirlo. Verificar que las respuestas cambian al cambiar realmente la escena; una frecuencia de mensajes no garantiza imágenes nuevas.
+Cada comando `echo` permanece activo hasta interrumpirlo. Verificar que las respuestas cambian al cambiar realmente la escena.
 
 ## 6. Iniciar el sistema integrado
 
@@ -139,18 +139,6 @@ ros2 topic echo /cmd_vel
 ros2 param get /puzzlebot_decision_logic max_v
 ```
 
-Si se modifica `params.yaml`, reconstruir y volver a cargar el workspace cuando sea necesario para actualizar la configuración instalada. No se ha comprobado aquí una ejecución en ROS ni en hardware.
+Si se modifica `params.yaml`, reconstruir y volver a cargar el workspace cuando sea necesario para actualizar la configuración instalada.
 
-## Diagnóstico
 
-| Síntoma | Comprobación |
-|---|---|
-| `No module named my_interfaces` | Recuperar y compilar el paquete original; cargar su entorno y verificar ambas interfaces. |
-| Error de carga del modelo | Comprobar ruta, archivo, versión compatible de Ultralytics y dependencias del checkpoint. |
-| El detector publica todo falso | Verificar que realmente cargó un modelo, recibe imágenes, reconoce las etiquetas y supera el umbral. |
-| No hay imágenes | Comprobar nombre y tipo del tópico, publicación de la cámara y compatibilidad QoS. |
-| Fallo de `imshow` | Usar una sesión gráfica y OpenCV con soporte GUI; no hay modo sin ventanas implementado. |
-| No se inicia una maniobra | Revisar confirmación de señal, cebra, estado actual y un mensaje verde recibido después de entrar en espera. |
-| Giro inesperado | El reporte describe una cámara reflejada horizontalmente; comprobar que la configuración actual conserva esa convención de `_pd_steering`. |
-| Se repiten detecciones con cámara congelada | Los nodos reutilizan la última imagen; falta una comprobación de antigüedad. |
-| El robot sigue avanzando al perder la línea | El detector publica error cero cuando no encuentra un contorno válido. |
