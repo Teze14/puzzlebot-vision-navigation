@@ -1,0 +1,42 @@
+puzzlebot_decision_logic:
+  ros__parameters:
+    # PD controller gains
+    kp: 1.0
+    kd: 0.1
+    max_v: 0.15
+
+    # Speed reduction factors (fraction of max_v)
+    yellow_speed_factor:   0.4   # traffic light yellow
+    roadwork_speed_factor: 0.5   # roadwork sign
+    give_way_speed_factor: 0.3   # give way / yield approach
+    approach_speed_factor: 0.7   # directional sign approach to intersection
+
+    # Maneuver (open-loop execution after green light)
+    maneuver_linear_v:      0.15  # m/s forward speed during maneuver
+    maneuver_angular_w:     0.8   # rad/s turn rate (left=+, right=-)
+    maneuver_straight_time: 2.5   # seconds for ahead-only crossing
+    maneuver_turn_time:     2.4   # seconds for left/right/roundabout turn
+
+    # State timing
+    stop_hold_time:  3.0   # seconds stopped at stop sign before resuming
+    approach_time:   2.5   # seconds of slow approach before stopping at intersection
+
+    # Sign debounce — require this many consecutive detections before acting
+    sign_confirm_count: 5
+
+    # Return to FOLLOWING this many seconds after roadwork sign disappears
+    roadwork_timeout: 3.0
+
+    # Ignore stop sign for this many seconds after resuming from STOP_HOLD
+    sign_cooldown_time: 5.0
+
+    # Clear red-light hold if red hasn't been seen for this many seconds (prevents false-positive lockup)
+    red_timeout: 1.5
+
+    # Abort INTERSECTION_WAIT and resume FOLLOWING if green never arrives within this time
+    intersection_wait_timeout: 10.0
+
+cnn_detector:
+  ros__parameters:
+    model_path: "/home/teze/ros2_ws/best_100epoch.pt"
+    confidence_threshold: 0.75
