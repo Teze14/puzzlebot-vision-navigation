@@ -1,0 +1,29 @@
+# Productos de compilación de ROS 2 y Python
+build/
+install/
+log/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Pesos, datasets y grabaciones: distribuir por separado
+*.pt
+*.onnx
+*.engine
+*.bag
+*.db3
+*.mcap
+datasets/
+runs/
+
+# Configuración local
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
