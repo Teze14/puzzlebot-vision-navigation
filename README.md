@@ -1,6 +1,6 @@
 # Puzzlebot: seguimiento de línea y navegación con señales
 
-Proyecto de robótica móvil desarrollado en equipo para el **MCR2 Final Challenge del Tecnológico de Monterrey, junio de 2026**, con **ROS 2 Humble, Python, OpenCV y YOLOv8**, según el reporte técnico. Integra percepción visual, seguimiento de línea con control PD y una máquina de estados que coordina la respuesta a semáforos, señales e intersecciones.
+Proyecto de robótica móvil desarrollado en equipo para el **MCR2 Final Challenge del Tecnológico de Monterrey, junio de 2026**, con **ROS 2 Humble, Python, OpenCV y YOLOv8**. Integra percepción visual, seguimiento de línea con control PD y una máquina de estados que coordina la respuesta a semáforos, señales e intersecciones.
 
 El reto consiste en convertir imágenes de una cámara en decisiones de movimiento: seguir una trayectoria, reducir la velocidad, detenerse y ejecutar maniobras según los elementos detectados en la pista. El escenario descrito en el reporte es una Puzzletrack modular de MDF con forma de «b», rectas, curvas y cruces con paso cebra.
 
